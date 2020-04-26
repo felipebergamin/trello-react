@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;600;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;700;800&display=swap');
 
   * {
     margin: 0;
@@ -24,6 +24,7 @@ export default createGlobalStyle`
 
   body, input, button {
     font-family: 'Baloo Tamma 2', cursive;
+    color: #4d4d4d;
   }
 
   a {
