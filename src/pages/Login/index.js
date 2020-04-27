@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Container, LoginForm, BgImage } from './styles';
 import BackgroundLeft from '../../assets/bg_left.svg';
@@ -15,7 +16,7 @@ export default function Login() {
 
           <input type="password" placeholder="Inserir senha" />
 
-          <button type="submit">Fazer Login</button>
+          <Link to="/boards">Fazer Login</Link>
         </LoginForm>
       </div>
 

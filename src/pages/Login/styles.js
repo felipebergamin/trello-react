@@ -38,7 +38,7 @@ export const LoginForm = styled.form`
     margin-bottom: 20px;
   }
 
-  button[type='submit'] {
+  a {
     background-color: rgb(90, 172, 68);
     border: none;
     padding: 8px 0px;
@@ -48,6 +48,7 @@ export const LoginForm = styled.form`
     color: white;
     font-weight: bold;
     font-size: 14px;
+    text-align: center;
   }
 
   button[type='submit']:hover {
