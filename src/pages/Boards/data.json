@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "A Fazer",
+    "cards": [
+      {
+        "id": 1,
+        "name": "task 1"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Fazendo",
+    "cards": []
+  }
+]
