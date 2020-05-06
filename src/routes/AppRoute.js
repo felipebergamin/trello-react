@@ -1,24 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 import DefaultLayout from '~/pages/_layouts/default';
-import Header from '~/components/header';
+import AppLayout from '~/pages/_layouts/app';
+import useAuth from '~/hooks/useAuth';
 
-export default function AppRoute({ component: Component, ...rest }) {
+export default function AppRoute({ component: Component, isPrivate, ...rest }) {
+  const { isSigned } = useAuth();
+
+  const Layout = isSigned ? AppLayout : DefaultLayout;
+
+  if (isPrivate && !isSigned) {
+    return <Redirect to="/login" />;
+  }
+
   return (
     <Route
       {...rest}
       render={(props) => (
-        <DefaultLayout>
-          <Header />
+        <Layout>
           <Component {...props} />
-        </DefaultLayout>
+        </Layout>
       )}
     />
   );
 }
 
+AppRoute.defaultProps = {
+  isPrivate: false,
+};
+
 AppRoute.propTypes = {
   component: PropTypes.node.isRequired,
+  isPrivate: PropTypes.bool,
 };

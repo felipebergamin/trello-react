@@ -1,11 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const AuthContext = React.createContext({});
+export const AuthContext = React.createContext({});
 
 export function AuthProvider({ children }) {
+  const [isSigned, setSigned] = React.useState(false);
+
+  const signIn = () => {
+    setSigned(true);
+  };
+
+  const signOut = () => {
+    setSigned(false);
+  };
+
   return (
-    <AuthContext.Provider value={{ isSigned: false }}>
+    <AuthContext.Provider value={{ isSigned, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

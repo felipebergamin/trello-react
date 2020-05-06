@@ -13,7 +13,7 @@ function Routes() {
         <Route path="/" exact render={() => <Redirect to="/login" />} />
         <Route path="/login" component={Login} exact />
         <Route path="/signup" component={SignUp} exact />
-        <AppRoute path="/boards" component={Boards} exact />
+        <AppRoute path="/boards" component={Boards} exact isPrivate />
       </Switch>
     </BrowserRouter>
   );

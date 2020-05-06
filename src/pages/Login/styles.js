@@ -38,7 +38,8 @@ export const LoginForm = styled.form`
     margin-bottom: 20px;
   }
 
-  a {
+  a,
+  .login-btn {
     background-color: rgb(90, 172, 68);
     border: none;
     padding: 8px 0px;

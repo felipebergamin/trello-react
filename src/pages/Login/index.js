@@ -1,11 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import { Container, LoginForm, BgImage } from './styles';
 import BackgroundLeft from '../../assets/bg_left.svg';
 import BackgroundRight from '../../assets/bg_right.svg';
+import useAuth from '~/hooks/useAuth';
 
 export default function Login() {
+  const auth = useAuth();
+
+  if (auth.isSigned) {
+    return <Redirect to="/boards" />;
+  }
+
   return (
     <Container>
       <div className="login-form-container">
@@ -16,7 +23,13 @@ export default function Login() {
 
           <input type="password" placeholder="Inserir senha" />
 
-          <Link to="/boards">Fazer Login</Link>
+          <button
+            type="button"
+            className="login-btn"
+            onClick={() => auth.signIn()}
+          >
+            Fazer Login
+          </button>
         </LoginForm>
       </div>
 
