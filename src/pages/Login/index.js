@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import { Container, LoginForm, BgImage } from './styles';
 import BackgroundLeft from '../../assets/bg_left.svg';
@@ -30,6 +30,8 @@ export default function Login() {
           >
             Fazer Login
           </button>
+
+          <Link to="/signup">SignUp</Link>
         </LoginForm>
       </div>
 

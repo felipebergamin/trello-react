@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   height: 100%;
@@ -40,20 +41,24 @@ export const LoginForm = styled.form`
 
   a,
   .login-btn {
-    background-color: rgb(90, 172, 68);
     border: none;
     padding: 8px 0px;
     border-radius: 4px;
     margin-bottom: 14px;
 
-    color: white;
     font-weight: bold;
     font-size: 14px;
     text-align: center;
   }
 
-  button[type='submit']:hover {
-    background-color: #61bd4f;
+  .login-btn {
+    transition: background-color 0.2s;
+    background-color: rgb(90, 172, 68);
+    color: white;
+  }
+
+  .login-btn:hover {
+    background-color: ${darken(0.1, 'rgb(90, 172, 68)')};
   }
 `;
 
