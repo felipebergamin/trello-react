@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export const AuthContext = React.createContext({});
+AuthContext.displayName = 'AuthContext';
 
 export function AuthProvider({ children }) {
   const [isSigned, setSigned] = React.useState(false);
