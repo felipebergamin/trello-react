@@ -1,41 +1,57 @@
 import styled, { css } from 'styled-components';
 import { darken } from 'polished';
 
-export const SignUpForm = styled.form`
-  width: 400px;
-  padding: 25px 40px;
-  background-color: white;
+export const SignUp = styled.div`
+  form {
+    width: 400px;
+    padding: 25px 40px;
+    background-color: white;
 
-  border-radius: 5px;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
+    border-radius: 5px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
 
-  input {
-    padding: 10px;
-    font-size: 14px;
-    background-color: #fafbfc;
-    border: 2px solid #dfe1e6;
-    margin-bottom: 20px;
-  }
+    .form-group {
+      margin-bottom: 20px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
 
-  .signup-btn {
-    transition: background-color 0.2s;
-    background-color: rgb(90, 172, 68);
-    color: white;
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      background-color: #fafbfc;
+      border: 2px solid #dfe1e6;
+    }
 
-    border: none;
-    padding: 8px 0px;
-    border-radius: 4px;
-    margin-bottom: 14px;
+    .error-message {
+      color: red;
+      text-align: right;
+      width: 100%;
+    }
 
-    font-weight: bold;
-    font-size: 14px;
-    text-align: center;
-  }
+    .signup-btn {
+      transition: background-color 0.2s;
+      background-color: rgb(90, 172, 68);
+      color: white;
 
-  .signup-btn:hover {
-    background-color: ${darken(0.1, 'rgb(90, 172, 68)')};
+      border: none;
+      padding: 8px 0px;
+      border-radius: 4px;
+      margin-bottom: 14px;
+
+      font-weight: bold;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .signup-btn:hover {
+      background-color: ${darken(0.1, 'rgb(90, 172, 68)')};
+    }
   }
 `;
 
