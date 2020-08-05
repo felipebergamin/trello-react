@@ -1,3 +1,12 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Project to reproduce Trello UI
 
-It is a personal project to practice my React skills reproducing the interface of trello web app.
+This code reproduce Trello UI with drag and drop feature
+
+To start it
+
+```
+yarn
+yarn start
+```
+
+**It's under development, so it may contain bugs**
