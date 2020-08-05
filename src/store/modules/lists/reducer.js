@@ -9,7 +9,7 @@ export default function lists(state = INITIAL_STATE, action = {}) {
         ...state,
         {
           id: v1(),
-          name: action.payload.name,
+          name: action.payload,
         },
       ];
     case '@lists/rename':

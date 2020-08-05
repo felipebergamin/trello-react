@@ -49,6 +49,7 @@ export const Board = styled.div`
 export const Card = styled.div`
   background-color: white;
   padding: 6px;
+  margin: 10px 0;
   border-radius: 4px;
   box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
 
@@ -57,4 +58,9 @@ export const Card = styled.div`
   p {
     font-size: 14px;
   }
+`;
+
+export const AddListButton = styled.button`
+  width: 222px;
+  min-height: 50px;
 `;

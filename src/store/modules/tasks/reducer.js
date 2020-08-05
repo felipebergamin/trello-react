@@ -21,7 +21,7 @@ export default function tasks(state = INITIAL_STATE, action = {}) {
     case '@tasks/move':
       return state.map((task) =>
         task.id === action.payload.id
-          ? { ...task, listId: action.payload.text }
+          ? { ...task, listId: action.payload.toList }
           : task
       );
     case '@tasks/delete':

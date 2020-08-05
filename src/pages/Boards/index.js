@@ -1,64 +1,26 @@
 import React from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
 
-import mockBoards from './data.json';
-
-import { Container, Board, Card } from './styles';
+import { addList } from '~/store/modules/lists/actions';
+import { addTask, moveTask } from '~/store/modules/tasks/actions';
+import { Container, Board, Card, AddListButton } from './styles';
 
 export default function Boards() {
-  const [boards, setBoards] = React.useState(mockBoards);
+  const dispatch = useDispatch();
 
-  const move = (source, destination, droppableSrc, droppableDst) => {
-    const sourceClone = Array.from(source.cards);
-    const destinationClone = Array.from(destination.cards);
-
-    const [itemRemoved] = sourceClone.splice(droppableSrc.index, 1);
-    destinationClone.splice(droppableDst.index, 0, itemRemoved);
-
-    return [
-      {
-        ...source,
-        cards: sourceClone,
-      },
-      {
-        ...destination,
-        cards: destinationClone,
-      },
-    ];
-  };
-
-  const getList = (listId) =>
-    boards.find((board) => String(board.id) === listId);
+  const { lists, tasks } = useSelector((store) => store);
 
   const onDragEnd = (result) => {
-    const { source, destination } = result;
+    const { destination, draggableId } = result;
 
-    if (!destination) {
-      return;
-    }
-
-    if (source.droppableId !== destination.droppableId) {
-      const moveResult = move(
-        getList(source.droppableId),
-        getList(destination.droppableId),
-        source,
-        destination
-      );
-
-      setBoards(
-        boards.map((board) => {
-          if (!moveResult.length > 0) return board;
-
-          const findAtResults = moveResult.findIndex(
-            (r) => String(r.id) === String(board.id)
-          );
-
-          if (findAtResults >= 0)
-            return moveResult.splice(findAtResults, 1).pop();
-          return board;
-        })
-      );
-    }
+    dispatch(
+      moveTask({
+        id: draggableId,
+        toList: destination.droppableId,
+      })
+    );
   };
 
   const getItemStyle = (isDragging, draggableStyle) => ({
@@ -75,56 +37,81 @@ export default function Boards() {
     width: 250,
   });
 
+  const handleAddList = () => {
+    const listName = prompt('Qual o nome da lista?');
+    dispatch(addList(listName));
+  };
+
+  const handleAddTask = (listId) => {
+    const text = prompt('Qual é o nome do card?');
+    dispatch(
+      addTask({
+        listId,
+        text,
+      })
+    );
+  };
+
   return (
     <Container>
       <DragDropContext onDragEnd={onDragEnd}>
-        {boards.map((board) => (
-          <Board key={String(board.id)}>
+        {lists?.map((list) => (
+          <Board key={String(list.id)}>
             <div className="container">
               <div className="header">
-                <h3>{board.name}</h3>
+                <h3>{list.name}</h3>
               </div>
 
-              <Droppable droppableId={String(board.id)}>
+              <Droppable droppableId={String(list.id)}>
                 {(provided, snapshot) => (
                   <div
                     ref={provided.innerRef}
                     className="cards-list"
                     sytle={getListStyle(snapshot.isDraggingOver)}
                   >
-                    {board.cards.map((task, index) => (
-                      <Draggable
-                        key={String(task.id)}
-                        draggableId={String(task.id)}
-                        index={index}
-                      >
-                        {(provided, snapshot) => (
-                          <Card
-                            key={String(task.id)}
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={getItemStyle(
-                              snapshot.isDragging,
-                              provided.draggableProps.style
-                            )}
-                          >
-                            <p>{task.name}</p>
-                          </Card>
-                        )}
-                      </Draggable>
-                    ))}
+                    {tasks
+                      .filter((task) => task.listId === list.id)
+                      .map((task, index) => (
+                        <Draggable
+                          key={String(task.id)}
+                          draggableId={String(task.id)}
+                          index={index}
+                        >
+                          {(provided, snapshot) => (
+                            <Card
+                              key={String(task.id)}
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              style={getItemStyle(
+                                snapshot.isDragging,
+                                provided.draggableProps.style
+                              )}
+                            >
+                              <p>{task.text}</p>
+                            </Card>
+                          )}
+                        </Draggable>
+                      ))}
                     {provided.placeholder}
                   </div>
                 )}
               </Droppable>
               <div className="footer">
-                <button type="button">Adicionar Outro Cartão</button>
+                <button type="button" onClick={() => handleAddTask(list.id)}>
+                  Adicionar Outro Cartão
+                </button>
               </div>
             </div>
           </Board>
         ))}
       </DragDropContext>
+
+      <div>
+        <AddListButton onClick={handleAddList}>
+          <AiOutlinePlus size={16} />
+        </AddListButton>
+      </div>
     </Container>
   );
 }
